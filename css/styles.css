@@ -1,0 +1,95 @@
+/* ================== Base ================== */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #000;
+  color: #fff;
+  scroll-behavior: smooth;
+  padding-top: 100px;
+  overflow-x: hidden;
+}
+.glow { color: red; text-shadow: 0 0 10px red, 0 0 20px #ff1a1a, 0 0 30px #ff3333; }
+
+/* ================== Header ================== */
+header, .site-header {
+  position: fixed; top:0; left:0; right:0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 15px 40px; z-index: 999;
+  backdrop-filter: blur(8px); border-bottom: 2px solid red;
+  background: rgba(0,0,0,0.9);
+}
+.site-left { display:flex; align-items:center; }
+.site-left .dp { width:70px; height:70px; border-radius:50%; border:3px solid red; object-fit:cover; }
+.site-center { flex:1; display:flex; flex-direction:column; align-items:center; gap:8px; padding:0 16px; }
+.site-center .brand { font-size:1.8rem; font-weight:bold; color:red; }
+.site-nav { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+.site-nav button, .site-nav a button { background:red; color:#fff; padding:8px 14px; border:none; border-radius:4px; cursor:pointer; font-weight:bold; }
+.site-nav button:hover, .site-nav a button:hover { background:#b20710; }
+.site-right { text-align:right; }
+.site-right p { margin:0; color:#38d054; font-weight:700; font-size:1rem; line-height:1.2; }
+
+/* ================== Hero Section ================== */
+.hero {
+  min-height:90vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
+  text-align:center; background-image:url("https://wallpaperaccess.com/full/2637581.jpg");
+  background-size:cover; background-position:center top; background-repeat:no-repeat;
+  animation: heroMove 60s linear infinite alternate;
+}
+.hero h1 { font-size:3rem; }
+.hero .highlight { color:red; }
+.hero p { font-size:1.2rem; }
+@keyframes heroMove { 0%{background-position:center top;} 50%{background-position:center center;} 100%{background-position:center bottom;} }
+
+/* ================== Sections ================== */
+section { padding:60px 20px; position:relative; overflow:hidden; color:#fff; }
+section h2 { font-size:2.5rem; text-align:center; margin-bottom:30px; text-shadow:0 0 15px red,0 0 30px #ff3333; animation: glowPulse 3s infinite alternate; }
+@keyframes glowPulse { from{ text-shadow:0 0 10px red,0 0 20px #b20710;} to{ text-shadow:0 0 20px #ff1a1a,0 0 40px #ff3333;} }
+
+/* ================== Background Animations ================== */
+.bg-section::before {
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(270deg, #ff0000, #111, #b20710, #000);
+  background-size:800% 800%; animation: gradientMove 15s ease infinite; opacity:0.9; z-index:0;
+}
+.bg-section::after {
+  content:""; position:absolute; inset:0;
+  background: url("https://upload.wikimedia.org/wikipedia/commons/7/7b/Stars_in_the_sky.jpg");
+  background-repeat: repeat; animation: moveStars 60s linear infinite; opacity:0.2; z-index:0;
+}
+.bg-section * { position:relative; z-index:2; }
+@keyframes gradientMove { 0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;} }
+@keyframes moveStars { 0%{background-position:0 0;}100%{background-position:-10000px 5000px;} }
+
+/* ================== Video Grid ================== */
+.video-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
+.video-wrapper { flex:1 1 300px; max-width:400px; transform:scale(0.95); transition: transform 0.3s, box-shadow 0.3s; }
+.video-wrapper:hover { transform:scale(1.05); box-shadow:0 0 20px red; }
+.video-wrapper iframe { width:100%; border-radius:12px; aspect-ratio:16/9; }
+.extra-videos { display:none; flex-wrap:wrap; justify-content:center; gap:20px; margin-top:20px; }
+.view-all-btn { margin-top:20px; padding:12px 25px; background-color:#bb0d0d; color:#fff; border:none; border-radius:8px; cursor:pointer; }
+.view-all-btn:hover { background-color:#03101f; }
+
+/* ================== Posts Section ================== */
+#posts { background:#111; text-align:center; border-radius:8px; padding:40px; transition:transform 0.3s; }
+#posts:hover { transform:translateY(-5px); }
+.view-posts-btn { background:linear-gradient(90deg, red, #b20710); border:none; padding:12px 24px; font-size:1rem; color:white; border-radius:6px; cursor:pointer; transition: transform 0.3s, box-shadow 0.3s; }
+.view-posts-btn:hover { transform:scale(1.1); box-shadow:0 0 15px red; }
+
+/* ================== Contact Section ================== */
+#contact { min-height:auto; padding:40px 20px; }
+
+/* ================== Footer ================== */
+footer { background:#111; padding:20px; text-align:center; color:gray; font-size:0.9rem; }
+
+/* ================== Scroll Animations ================== */
+[data-animate] { opacity:0; transform:translateY(40px); transition:all 1s ease; }
+[data-animate].active { opacity:1; transform:translateY(0); }
+
+/* ================== Responsive ================== */
+@media (max-width:768px){
+  .site-header { flex-direction:column; align-items:center; gap:10px; padding:16px; }
+  .site-left { order:1; }
+  .site-center { order:2; width:100%; }
+  .site-right { order:3; text-align:center; }
+  .video-grid { flex-direction:column; gap:15px; }
+}
